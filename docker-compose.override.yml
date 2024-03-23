@@ -20,5 +20,5 @@ services:
       restart: always
       ports:
         - 8180:8080  
-      links:
-        - catalogdb:catalogdb
+      # links:
+      #   - catalogdb:catalogdb
