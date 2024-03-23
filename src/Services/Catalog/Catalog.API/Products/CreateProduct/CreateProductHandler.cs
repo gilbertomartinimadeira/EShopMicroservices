@@ -1,6 +1,7 @@
 using BuildingBlocks.CQRS;
 using Catalog.API.Models;
-using MediatR;
+
+namespace Catalog.API.Products.CreateProduct;
 
 public record CreateProductCommand(
                                     string Name, 
@@ -30,7 +31,7 @@ public class CreateProductHandler
 
         //  return CreateProductResult result
 
-        return new CreateProductResult(Guid.NewGuid());
+        return await Task.FromResult(new CreateProductResult(Guid.NewGuid()));
             
     }
 }
