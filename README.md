@@ -15,3 +15,16 @@ builder.Services.AddHttpsRedirection(options =>
 });
 
 dotnet add package Mediatr
+
+dotnet new classlib
+
+using Carter to create endpoints
+
+dotnet add package carter
+
+AddCarter 
+MapCarter
+
+using Mapster to map objects
+
+dotnet add package Mapster 
