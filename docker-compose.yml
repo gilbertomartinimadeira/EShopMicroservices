@@ -3,11 +3,11 @@
 version: '3.4'
 
 services:
-  catalogapi:
-    image: catalogapi
-    build:
-      context: .
-      dockerfile: src/Services/Catalog/Catalog.API/Dockerfile
-    ports:
-      - 8080:8080
-      - 8081:8081
+    catalogdb:  
+      image: postgres
+    adminer:
+      image: adminer
+    
+volumes:
+  postgres_catalog:
+

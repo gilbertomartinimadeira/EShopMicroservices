@@ -1,10 +1,12 @@
+
+sudo aa-remove-unknown 
+
 dotnet new sln -o eshop-microservices
 
 
 dotnet new web  -> creates a new empty web project 
 
 dotnet sln add ./folder-to/csproj
-
 
 dotnet dev-certs https --trust
 
@@ -28,3 +30,29 @@ MapCarter
 using Mapster to map objects
 
 dotnet add package Mapster 
+
+use Marten to treat Postgresql as a .NET transactional Document DB
+
+-- adding to Catalog Api
+
+dotnet add package Marten
+
+IDocumentSession on primary constructor of the handler
+
+
+docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
+
+
+
+docker exec -it pg sh
+
+psql -U postgres
+
+\l
+
+\c databasename
+
+\d
+
+
+
