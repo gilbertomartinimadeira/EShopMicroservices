@@ -1,8 +1,4 @@
 
-using Carter;
-using Mapster;
-using MediatR;
-
 public record CreateProductRequest(string Name, 
                                     List<string> Category, 
                                     string Description, 
