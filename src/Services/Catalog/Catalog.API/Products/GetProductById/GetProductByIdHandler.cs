@@ -10,6 +10,7 @@ public record GetProductByIdQuery(Guid Id) : IQuery<GetProductByIdResult>;
 public record GetProductByIdResult(Product Product);
 
 
+
 public class GetProductByIdHandler(IDocumentSession session, ILogger<GetProductByIdHandler> logger)
     : IQueryHandler<GetProductByIdQuery, GetProductByIdResult>
 {
