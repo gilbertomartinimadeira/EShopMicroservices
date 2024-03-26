@@ -1,0 +1,68 @@
+{
+    "info": {
+        "_postman_id": "c85de0cb-2ea2-419a-95e3-855dafb27903",
+        "name": "EShopMicroservices",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Catalog",
+            "item": [
+                {
+                    "name": "localhost:5000/products",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "localhost:5000/products",
+                            "path": [
+                                "products"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"Name\" : \"Galaxy M51\",\n  \"Category\" : [\"Smartphone\", \"Electronics\", \"Mobile\"],\n  \"Description\": \"Samsung Galaxy M51\",\n  \"ImageFile\":\"\",\n  \"Price\" : 1500\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "localhost:5000/products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:5000/products",
+                            "path": [
+                                "products"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Basket",
+            "item": []
+        },
+        {
+            "name": "Discount",
+            "item": []
+        },
+        {
+            "name": "Ordering",
+            "item": []
+        }
+    ]
+}
