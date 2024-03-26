@@ -14,11 +14,9 @@ public class GetProductByCategoryEndpoint : ICarterModule
         app.MapGet("/products/category/{category}", async (ISender sender, string category) =>
         {
 
-            var query = new GetProductsByCategoryRequest(category);
-
-            var response = await sender.Send(query.Adapt<GetProductsByCategoryQuery>());
-
-            return new GetProductsByCategoryResponse(response.Products);
+            var result = await sender.Send(new GetProductsByCategoryQuery(category));
+            var response = result.Adapt<GetProductsByCategoryResponse>();
+            return Results.Ok(response);
 
         });
     }
