@@ -20,21 +20,13 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 }
 
 public class CreateProductHandler
-(IDocumentSession session, IValidator<CreateProductCommand> validator)
+(IDocumentSession session, ILogger<CreateProductHandler> logger)
 : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        // validate command prior to create a product
-        var validationResult = await validator.ValidateAsync(command, cancellationToken);
-        var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+        logger.LogInformation("CreateProductHandler.Handle called with @{command}", command);
 
-        if(errors.Any()){
-            // I'm just following the tutorial, I wouldn't do this..
-            throw new ValidationException(errors.FirstOrDefault());
-        }
-
-        // Create a product Entity
         var product = new Product()
         {
             Name = command.Name,
