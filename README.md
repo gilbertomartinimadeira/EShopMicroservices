@@ -3,7 +3,6 @@ sudo aa-remove-unknown
 
 dotnet new sln -o eshop-microservices
 
-
 dotnet new web  -> creates a new empty web project 
 
 dotnet sln add ./folder-to/csproj
@@ -20,20 +19,20 @@ dotnet add package Mediatr
 
 dotnet new classlib
 
-using Carter to create endpoints
+# using Carter to create endpoints
 
 dotnet add package carter
 
 AddCarter 
 MapCarter
 
-using Mapster to map objects
+ # using Mapster to map objects
 
 dotnet add package Mapster 
 
-use Marten to treat Postgresql as a .NET transactional Document DB
+# use Marten to treat Postgresql as a .NET transactional Document DB
 
--- adding to Catalog Api
+# adding to Catalog Api
 
 dotnet add package Marten
 
@@ -53,6 +52,14 @@ psql -U postgres
 \c databasename
 
 \d
+
+
+# fluent validation common to all services, adding it to buildingblocks
+
+dotnet add package fluentvalidation.dependencyinjectionextensions
+
+
+
 
 
 

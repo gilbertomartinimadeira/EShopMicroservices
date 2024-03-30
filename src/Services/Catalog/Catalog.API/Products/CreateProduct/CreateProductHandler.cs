@@ -8,12 +8,31 @@ public record CreateProductCommand(
                                     decimal Price) : ICommand<CreateProductResult>;
 public record CreateProductResult(Guid Id);
 
-public class CreateProductHandler(IDocumentSession session)
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+{
+    public CreateProductCommandValidator()
+    {
+        RuleFor(c => c.Name).NotEmpty().WithMessage("Name is required");
+        RuleFor(c => c.Description).NotEmpty().WithMessage("Description is required");
+        RuleFor(c => c.ImageFile).NotEmpty().WithMessage("ImageFile is required");
+        RuleFor(c => c.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+    }
+}
+
+public class CreateProductHandler
+(IDocumentSession session, IValidator<CreateProductCommand> validator)
 : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        //perform business logic to create a product
+        // validate command prior to create a product
+        var validationResult = await validator.ValidateAsync(command, cancellationToken);
+        var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
+
+        if(errors.Any()){
+            // I'm just following the tutorial, I wouldn't do this..
+            throw new ValidationException(errors.FirstOrDefault());
+        }
 
         // Create a product Entity
         var product = new Product()
@@ -25,7 +44,7 @@ public class CreateProductHandler(IDocumentSession session)
             Price = command.Price
         };
 
-        // TODO: save to database
+        // Save to database
         session.Store(product);
 
         try
