@@ -25,7 +25,7 @@ where TResponse : notnull
         var elapsedTime = timer.Elapsed;
 
         if (elapsedTime.Seconds > 3) //
-            logger.LogWarning("[PERFORMANCE] The request {Request} took {timeTaken} to complete",
+            logger.LogWarning("[PERFORMANCE] The request {Request} took {timeTaken} seconds to complete",
             typeof(TRequest).Name, elapsedTime.Seconds);
 
 
