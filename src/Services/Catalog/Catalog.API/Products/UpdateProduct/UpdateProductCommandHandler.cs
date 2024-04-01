@@ -39,7 +39,7 @@ public class UpdateProductCommandHandler(IDocumentSession session,
 
         if (productDb is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Id);
         }
 
         productDb = command.Adapt<Product>();

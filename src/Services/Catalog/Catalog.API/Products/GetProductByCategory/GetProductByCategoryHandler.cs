@@ -18,7 +18,7 @@ public class GetProductByCategoryHandler(IDocumentSession session, ILogger<GetPr
 
         if (products is null)
         {
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(Guid.NewGuid());
         }
 
         return new GetProductByCategoryResult(products);
