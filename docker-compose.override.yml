@@ -1,24 +1,44 @@
-version: '3.4'
+version: "3.4"
 
 services:
-    catalogdb:  
-      container_name: catalogdb
-      environment: 
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-        - POSTGRES_DB=CatalogDb
-      image: postgres
-      restart: always
-      ports: 
-        - "5432:5432"
-      
-      volumes:
-        - postgres_catalog:/var/lib/postgresql/data/
-      
-    adminer:
-      image: adminer
-      restart: always
-      ports:
-        - 8180:8080  
-      # links:
-      #   - catalogdb:catalogdb
+  catalogdb:
+    container_name: catalogdb
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=CatalogDb
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_catalog:/var/lib/postgresql/data/
+
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8180:8080
+  #   # links:
+  #   #   - catalogdb:catalogdb
+
+  catalogapi:
+    image: gilmartmd/catalog-api
+    build:
+      context: .
+      dockerfile: src/Services/Catalog/Catalog.API/Dockerfile
+      args:
+        - configuration=Debug
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      # - ConnectionStrings__Database=Server=catalogdb;Port=5432;Database;CatalogDb;User Id=postgres;password=postgres;Include Error Detail=true
+    depends_on:
+      - catalogdb
+    ports:
+      - 6000:8080
+      - 6060:8081
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
