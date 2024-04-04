@@ -7,7 +7,7 @@ services:
     image: postgres
   # adminer:
   #   image: adminer
-  catalogapi:
-    image: gilmartd/catalog-api
+  # catalogapi:
+  #   image: gilmartd/catalog-api
 volumes:
   postgres_catalog:
