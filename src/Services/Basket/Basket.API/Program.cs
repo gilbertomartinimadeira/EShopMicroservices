@@ -1,3 +1,5 @@
+using BuildingBlocks.Exceptions.Handler;
+
 var builder = WebApplication.CreateBuilder(args);
 var apiAssembly = typeof(Program).Assembly;
 
@@ -18,10 +20,13 @@ builder.Services.AddMediatR(config => {
 });
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
-
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 var app = builder.Build();
 
 // configure the request pipeline
 app.MapCarter();
+
+
+app.UseExceptionHandler(options => {});
 
 app.Run();
