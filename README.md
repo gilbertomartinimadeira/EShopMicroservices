@@ -37,6 +37,8 @@ dotnet add package Marten
 
 IDocumentSession on primary constructor of the handler
 
+session.LoadAsync -> retrieves one entity from db
+
 docker compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
 docker exec -it pg sh
@@ -56,3 +58,5 @@ dotnet add package fluentvalidation.dependencyinjectionextensions
 # adds aspnet capabilities to building blocks in order to use Global Exception Handling
 
 FluentValidation.AspNetCore
+
+
