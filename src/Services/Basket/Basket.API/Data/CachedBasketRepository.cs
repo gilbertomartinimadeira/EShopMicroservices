@@ -21,13 +21,21 @@ public class CachedBasketRepository
         return basket;
     }
 
-    public async Task<ShoppingCart> StoreBasket(ShoppingCart cart, CancellationToken cancellationToken = default)
+    public async Task<ShoppingCart> StoreBasket(ShoppingCart basket, CancellationToken cancellationToken = default)
     {
-        return await repository.StoreBasket(cart, cancellationToken);
+        await repository.StoreBasket(basket, cancellationToken);
+
+        await cache.SetStringAsync(basket.UserName, JsonSerializer.Serialize(basket), cancellationToken)!;
+
+        return basket;
     }
 
     public async Task<bool> DeleteBasket(string userName, CancellationToken cancellationToken = default)
     {
-        return await repository.DeleteBasket(userName, cancellationToken);
+        await repository.DeleteBasket(userName, cancellationToken);
+        await cache.RemoveAsync(userName, cancellationToken);
+        return true;
+
+
     }
 }
