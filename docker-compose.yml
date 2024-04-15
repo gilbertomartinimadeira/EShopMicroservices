@@ -11,6 +11,9 @@ services:
   #   image: adminer
   # catalogapi:
   #   image: gilmartd/catalog-api
+  distributedcache:
+    image: redis/redis-stack:latest  
+
 volumes:
   postgres_catalog:
   postgres_basket:

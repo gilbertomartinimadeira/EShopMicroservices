@@ -34,6 +34,13 @@ services:
     restart: always
     ports:
       - 8180:8080
+
+  distributedcache:
+    container_name: distributedcache
+    restart: always
+    ports:
+      - "6379:6379"
+      - "8001:8001"
     # links:
     #   - catalogdb:catalogdb
 
