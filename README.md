@@ -60,3 +60,10 @@ dotnet add package fluentvalidation.dependencyinjectionextensions
 FluentValidation.AspNetCore
 
 
+# Adds support to Redis Caching
+dotnet add package Microsoft.Extensions.Caching.StackExchangeRedis
+
+# Adds support to scrutor ( managing DI for Decorators , adds Scan and Decorate methods to Service Collection ) 
+dotnet add package Scrutor
+
+
