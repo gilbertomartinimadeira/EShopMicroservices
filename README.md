@@ -70,10 +70,3 @@ dotnet add package Scrutor
 docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
 
 
-# Adds Health check for Redis and PgSql
-
-dotnet add package AspNetCore.HealthChecks.Redis --version 8.0.1
-dotnet add package AspNetCore.HealthChecks.NpgSql --version 8.0.1
-
-# Add the UI CLient to see the health status
-dotnet add package AspNetCore.HealthChecks.UI.Client --version 8.0.1
