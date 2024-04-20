@@ -16,11 +16,10 @@ public class DiscountService(DiscountContext db, ILogger<DiscountService> logger
 
         if (coupon is null)
         {
-
             coupon = new Coupon { ProductName = "No Discount", Amount = 0, ProductDescription = "No Discount Desc" };
         };
 
-        logger.LogInformation("Coupon was not found");
+        logger.LogInformation("Discount is retrieved for ProductName: {productName}",request.ProductName);
         return new CouponModel()
         {
             Amount = coupon.Amount,
