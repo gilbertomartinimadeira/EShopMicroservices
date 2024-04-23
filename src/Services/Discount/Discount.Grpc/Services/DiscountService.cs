@@ -7,21 +7,24 @@ using static Discount.Grpc.DiscountProtoService;
 
 namespace Discount.Grpc.Services;
 
-public class DiscountService(DiscountContext db, ILogger<DiscountService> logger) : DiscountProtoServiceBase
+public class DiscountService
+(DiscountContext db, ILogger<DiscountService> logger)
+ : DiscountProtoServiceBase
 {
     public override async Task<CouponModel> GetDiscount(GetDiscountRequest request, ServerCallContext context)
     {
-        // TODO: GetDiscount from database
-        logger.LogInformation("Fetching coupon from database...");
-        var coupon = await db.Coupons.FirstOrDefaultAsync(p => p.ProductName == request.ProductName);
+        var coupon = await db.Coupons
+                             .FirstOrDefaultAsync(
+                                p => p.ProductName == request.ProductName
+                             );
 
         if (coupon is null)
         {
-            coupon = new Coupon { ProductName = "No Discount", Amount = 0, ProductDescription = "No Discount Desc" };
+            coupon = new Coupon { ProductName = "No Discount", Amount = 0, Description = "No Discount Desc" };
         };
 
-        logger.LogInformation("Discount is retrieved for ProductName: {productName}",request.ProductName);
-        
+        logger.LogInformation("Discount is retrieved for ProductName: {productName}", request.ProductName);
+
         var couponModel = coupon.Adapt<CouponModel>();
         return couponModel;
 
@@ -30,21 +33,21 @@ public class DiscountService(DiscountContext db, ILogger<DiscountService> logger
 
     public override async Task<CouponModel> CreateDiscount(CreateDiscountRequest request, ServerCallContext context)
     {
-        
+
         //Get incoming request
         var coupon = request.Coupon.Adapt<Coupon>();
-        if( coupon is null) 
+        if (coupon is null)
             throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid request object."));
-        
-        
+
+
         db.Coupons.Add(coupon);
         await db.SaveChangesAsync();
 
-        logger.LogInformation("Discount was successfully created. ProductName : {ProductName}",coupon.ProductName);
-        
+        logger.LogInformation("Discount was successfully created. ProductName : {ProductName}", coupon.ProductName);
+
         var couponModel = coupon.Adapt<CouponModel>();
-          return couponModel;
-    
+        return couponModel;
+
 
     }
 
